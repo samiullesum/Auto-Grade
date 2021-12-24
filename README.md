@@ -1,10 +1,9 @@
-# MERN JWT Authentication
+# Auto-Grade
 
-MERN JWT Authentication is a minimal full-stack login/authorization app developed using the `MERN` stack (`MongoDB` for our database, `Express` and `Node` for our backend, and `React` for our frontend). Also integrate `Redux` for state management for our `React` components.
+Auto-Grade full-stack web app developed using the `MERN` stack (`MongoDB` for our database, `Express` and `Node` for our backend, and `React` for our frontend). Also integrated `Redux` for the state management for our `React` components.
 
 ## :link: Live Demo
 
-Here's a [live demo](https://mern-jwt-login.herokuapp.com/)
 
 <p align="center"> 
   <kbd>
@@ -24,13 +23,18 @@ Here's a [live demo](https://mern-jwt-login.herokuapp.com/)
   </kbd>
 </p>
 
-**MERN JWT Authentication app will allow users to**
+**Auto-Grade app will allow users to**
 
 - Register
 - Log in
 - Access protected pages only accessible to logged in users
 - Stay logged in when they close the app or refresh the page
 - Log out
+- File upload
+- Generate pdf File
+- Create a Course with student data
+- Upload student marks in different assessments like quiz, assignment, project midterm and final
+- Generate students grade automatically based on uploaded marks
 
 
 
@@ -140,7 +144,7 @@ Lastly, make sure you have the following installed.
 
 #### Contributing
 
-1. Fork it ( https://github.com/ipsum13/JWT_LOGIN/fork )
+1. Fork it ( https://github.com/samiullesum/Auto-Grade/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
