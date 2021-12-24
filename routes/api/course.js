@@ -383,6 +383,20 @@ router.get("/get-final-marks", async (req, res) => {
   }
 })
 
+router.put("/update-quiz-data", async (req, res) => {
+  const students = req.body.student;
+  const index = 1;
+
+  for (let i = 1; i < students.length; i++) {
+    const student = await Student.findOne({id: students[i].id});
+    if(student) {
+      student.updateOne({ $set: { [`quizes.${index}.title`]: 'Quiz2' }}).exec();
+    }
+    
+  
+  }
+})
+
 
 
 

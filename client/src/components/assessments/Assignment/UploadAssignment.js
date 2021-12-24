@@ -143,7 +143,7 @@ class UploadAssignment extends Component {
                                                 style={{ height: '45px', marginTop: '5px' }}
                                                 onClick={this.handleOpenDialog}
                                             >
-                                                Browse Assignment File
+                                                Browse File
                                             </Button>
                                             <div
                                                 style={{

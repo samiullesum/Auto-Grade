@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 
-class Quizes extends Component {
-    render() {
+const Quizes  = () => {
+    
         return (
             <>
                 <Table striped bordered hover size="sm">
@@ -256,7 +257,10 @@ class Quizes extends Component {
 
             </>
         )
-    }
+    
 }
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
 
-export default Quizes
+export default connect(mapStateToProps)(Quizes);

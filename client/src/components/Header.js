@@ -71,7 +71,7 @@ const Header = props => {
   const currentRoute = window.location.pathname;
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="dark">
-      <Navbar.Brand href="/" style={{ color: "black" }}>
+      <Navbar.Brand href="/" style={{ color: "#092040", fontWeight: '700' }}>
         Auto-Grade
 
       </Navbar.Brand>

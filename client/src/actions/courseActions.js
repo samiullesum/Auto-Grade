@@ -101,6 +101,21 @@ export const uploadFinalMarks = async (marksData) => {
   }
 };
 
+export const updateQuizData = async (data) => {
+  try {
+    const res =  await axios.put("/api/course/update-quiz-data", data);
+    if (res.status === 200) {
+      cogoToast.success('Final exam marks uploaded', {
+        position: "top-right",
+      });
+    }
+  } catch(err) {
+    cogoToast.error('Failed to upload final exam marks! Please try again', {
+      position: "top-right",
+    });
+  }
+};
+
 
 
 

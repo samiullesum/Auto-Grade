@@ -65,12 +65,19 @@ const Dashboard = props => {
                   Autumn 2021
                 </Card.Text>
 
-                <DropdownButton id="dropdown-basic-button" title="View Course Assessments" style={{ marginTop: '8px' }}>
-                  <Dropdown.Item href="/quizes">Quizes</Dropdown.Item>
+                <DropdownButton id="dropdown-basic-button" title="View Assessment Marks" style={{ marginTop: '8px' }}>
+                  <Dropdown.Item href={`/quizes/${item}`}>Quizes</Dropdown.Item>
                   <Dropdown.Item href="/assignments">Assignments</Dropdown.Item>
                   <Dropdown.Item href="/project">Project</Dropdown.Item>
                   <Dropdown.Item href="/midterm">Midterm</Dropdown.Item>
                   <Dropdown.Item href="/final">Final</Dropdown.Item>
+                </DropdownButton>
+                <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px' }}>
+                  <Dropdown.Item href="/upload-quiz-marks">Quizes</Dropdown.Item>
+                  <Dropdown.Item href="/upload-assignment-marks">Assignments</Dropdown.Item>
+                  <Dropdown.Item href="/upload-project-marks">Project</Dropdown.Item>
+                  <Dropdown.Item href="/upload-midterm-marks">Midterm</Dropdown.Item>
+                  <Dropdown.Item href="/upload-final-marks">Final</Dropdown.Item>
                 </DropdownButton>
               </Card.Body>
             </Card>
