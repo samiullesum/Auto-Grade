@@ -17,11 +17,6 @@ Auto-Grade full-stack web app developed using the `MERN` stack (`MongoDB` for ou
   </kbd>
 </p>
 
-<p align="center"> 
-  <kbd>
-<img src="https://res.cloudinary.com/sam13/image/upload/v1614530459/screen_evc9bd.png"></img>
-  </kbd>
-</p>
 
 **Auto-Grade app will allow users to**
 
