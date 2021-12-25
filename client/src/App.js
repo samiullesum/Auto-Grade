@@ -28,6 +28,8 @@ import UploadMidterm from './components/assessments/Midterm/UploadMidterm';
 import UploadFinal from './components/assessments/Final/UploadFinal';
 import CreateCourse from './components/createCourse/CreateCourse';
 
+import Grades from './components/generateFinalGrade/Grades';
+
 import "./App.css";
 
 // Check for token to keep user logged in
@@ -73,6 +75,8 @@ class App extends Component {
               <PrivateRoute exact path="/upload-midterm-marks" component={UploadMidterm} />
               <PrivateRoute exact path="/upload-final-marks" component={UploadFinal} />
               <PrivateRoute exact path="/create-course" component={CreateCourse} />
+
+              <PrivateRoute exact path="/generate-grades/:course/:section" component={Grades} />
             </Switch>
           </div>
         </Router>

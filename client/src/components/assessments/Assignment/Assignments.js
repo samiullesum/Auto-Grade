@@ -85,7 +85,7 @@ const Assignments = props => {
         if (assignments.length > 0) {
             return (
                 <>
-                    <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">📄 Assignment Marks for {course}</Badge></h1></div>
+                    <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary"><span role="img" aria-label="image">📄</span> Assignment Marks for {course}</Badge></h1></div>
                     <Table striped bordered hover size="sm" style={{ background: "#fff" }}>
                         <thead>
                             <tr>

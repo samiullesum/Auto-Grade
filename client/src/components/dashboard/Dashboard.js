@@ -17,7 +17,6 @@ const Dashboard = props => {
 
     axios.get(`/api/course/get-courses/${props.auth.user.id}`).then((response) => {
       const data = [];
-      console.log(response);
       for (let i = 0; i < response.data.length; i++) {
         const item = {
           faculty: response.data[i].faculty,
@@ -78,7 +77,8 @@ const Dashboard = props => {
                   <Dropdown.Item href={`/midterm/${item.course}/${item.section}`}>Midterm</Dropdown.Item>
                   <Dropdown.Item href={`/final/${item.course}/${item.section}`}>Final</Dropdown.Item>
                 </DropdownButton>
-                <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px' }}>
+                <Button href={`/generate-grades/${item.course}/${item.section}`} style={{marginTop: '9px', marginRight: '39px', background: "#092040", border: "none" }}>View Course Grades</Button>
+                <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px', marginLeft: '15px' }}>
                   <Dropdown.Item href="/upload-quiz-marks">Quizes</Dropdown.Item>
                   <Dropdown.Item href="/upload-assignment-marks">Assignments</Dropdown.Item>
                   <Dropdown.Item href="/upload-project-marks">Project</Dropdown.Item>

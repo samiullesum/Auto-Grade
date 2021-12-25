@@ -414,14 +414,101 @@ router.put("/update-quiz-data", async (req, res) => {
     if (student) {
       student.updateOne({ $set: { [`quizes.${index}.title`]: 'Quiz2' } }).exec();
     }
-
-
   }
 })
 
+router.get("/generate-grade", async (req, res) => {
+  try {
+    const students = await Student.find({ course: req.query.course, section: req.query.section, faculty: req.query.faculty });
+    const course = await Course.findOne({ course_title: req.query.course });
+    const totalQ = course.quiz;
+    const totalA = course.assignment;
+    const totalP = course.project;
+    const totalM = course.midterm;
+    const totalF = course.final;
 
+    let totalQuiz;
+    let totalAssignment;
+    let totalProject;
+    let totalMidterm;
+    let totalFinal;
 
+    const grade = [];
 
+    for (let i = 0; i < students.length; i++) {
+      if (students[i].quizes.length > 0) {
+        let marksQ = students[i].quizes.map(item => parseInt(item.marksObtained));
+        let totalmQ = students[i].quizes.map(item => parseInt(item.totalMarks));
+        let sumQ = marksQ.reduce((a, b) => a + b, 0);
+        let totalmSumQ = totalmQ.reduce((a, b) => a + b, 0);
+        totalQuiz = ((totalQ * sumQ) / totalmSumQ).toFixed(1);
+      } else {
+        totalQuiz = 0;
+      }
+      
+
+      if (students[i].assignments.length > 0) {
+        let marksA = students[i].assignments.map(item => parseInt(item.marksObtained));
+        let totalmA = students[i].assignments.map(item => parseInt(item.totalMarks));
+        let sumA = marksA.reduce((a, b) => a + b, 0);
+        let totalmSumA = totalmA.reduce((a, b) => a + b, 0);
+        totalAssignment = ((totalA * sumA) / totalmSumA).toFixed(1);
+      } else {
+        totalAssignment = 0;
+      }
+      
+
+      if (students[i].project.length > 0) {
+        let marksP = students[i].project.map(item => parseInt(item.marksObtained));
+        let totalmP = students[i].project.map(item => parseInt(item.totalMarks));
+        let sumP = marksP.reduce((a, b) => a + b, 0);
+        let totalmSumP = totalmP.reduce((a, b) => a + b, 0);
+        totalProject = ((totalP * sumP) / totalmSumP).toFixed(1);
+      } else {
+        totalProject = 0;
+      }
+      
+
+      if (students[i].midterm.length > 0) {
+        let marksM = students[i].midterm.map(item => parseInt(item.marksObtained));
+        let totalmM = students[i].midterm.map(item => parseInt(item.totalMarks));
+        let sumM = marksM.reduce((a, b) => a + b, 0);
+        let totalmSumM = totalmM.reduce((a, b) => a + b, 0);
+        totalMidterm = ((totalM * sumM) / totalmSumM).toFixed(1);
+      } else {
+        totalMidterm = 0;
+      }
+      
+
+      if (students[i].final.length > 0) {
+        let marksF = students[i].final.map(item => parseInt(item.marksObtained));
+        let totalmF = students[i].final.map(item => parseInt(item.totalMarks));
+        let sumF = marksF.reduce((a, b) => a + b, 0);
+        let totalmSumF = totalmF.reduce((a, b) => a + b, 0);
+        totalFinal = ((totalF * sumF) / totalmSumF).toFixed(1);
+      } else {
+        totalFinal = 0;
+      }
+    
+      const item = {
+        id: students[i].id,
+        name: students[i].name,
+        total: parseInt(totalQuiz) + parseInt(totalAssignment) + parseInt(totalProject) + parseInt(totalMidterm) + parseInt(totalFinal)
+      }
+      grade.push(item)
+    }
+
+    if (!students) {
+      return res.status(404).json({ msg: 'Students not found for this course' });
+    }
+
+    res.json(grade);
+  } catch (err) {
+    console.error(err.message);
+
+    res.status(500).send('Server Error');
+  }
+})
 
 
 module.exports = router;

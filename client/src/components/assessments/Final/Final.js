@@ -100,7 +100,6 @@ const Final = props => {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.final[0] ? item.final[0].marksObtained : 0}</td>
-
                                     <td>{finalAvg(item.final)}</td>
                                 </tr>
                             )}
