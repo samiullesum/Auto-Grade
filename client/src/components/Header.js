@@ -30,8 +30,8 @@ const Header = props => {
                 Create a Course
               </Button>
             </Nav.Link>
-            <DropdownButton id="dropdown-basic-button" title="Account" style={{ marginTop: '8px' }}>
-              <Dropdown.Item onClick={onLogoutClick}>Log out</Dropdown.Item>
+            <DropdownButton style={{background: "#DFF4FF" }} id="dropdown-basic-button" title="Account" style={{ marginTop: '8px' }}>
+              <Dropdown.Item style={{color: "#092040", fontWeight: '600' }}onClick={onLogoutClick}>⚙️Log out</Dropdown.Item>
 
             </DropdownButton>
           </Nav>

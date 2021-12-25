@@ -15,6 +15,14 @@ h1 {
   color: #092040;
 }
 
+Table > tbody > tr:nth-child(2n+1) > td, Table > tbody > tr:nth-child(2n+1) > th {
+  background-color: #86A4CC;
+  border: 1px solid #86A4CC;
+}
+Table > tbody > tr:nth-child(2n) > td, Table > tbody > tr:nth-child(2n) > th {
+  border: none !important;
+}
+
 Button {
   background: #092040 !important;
   border: 1px solid #092040 !important;

@@ -16,9 +16,15 @@ const Dashboard = props => {
   const getCourses = () => {
 
     axios.get(`/api/course/get-courses/${props.auth.user.id}`).then((response) => {
-      const data = []
+      const data = [];
+      console.log(response);
       for (let i = 0; i < response.data.length; i++) {
-        data.push(response.data[i].course_title);
+        const item = {
+          faculty: response.data[i].faculty,
+          course: response.data[i].course_title,
+          section: response.data[i].section
+        }
+        data.push(item);
       }
       setCourses(data);
       setFetching(false);
@@ -33,7 +39,7 @@ const Dashboard = props => {
       return <h4 class="loading">Loading...</h4>;
     }
 
-    if (courses.length == 0) {
+    if (courses.length === 0) {
       return (
         <div style={{ display: 'table', margin: '0 auto', paddingTop: '5vw' }}>
           <Card
@@ -60,17 +66,17 @@ const Dashboard = props => {
             <Card key={idx} style={{ width: '18rem' }}>
               <Card.Img variant="top" src={imageArr[0]} />
               <Card.Body>
-                <Card.Title>{item}</Card.Title>
+                <Card.Title>{item.course}</Card.Title>
                 <Card.Text>
                   Autumn 2021
                 </Card.Text>
 
                 <DropdownButton id="dropdown-basic-button" title="View Assessment Marks" style={{ marginTop: '8px' }}>
-                  <Dropdown.Item href={`/quizes/${item}`}>Quizes</Dropdown.Item>
-                  <Dropdown.Item href="/assignments">Assignments</Dropdown.Item>
-                  <Dropdown.Item href="/project">Project</Dropdown.Item>
-                  <Dropdown.Item href="/midterm">Midterm</Dropdown.Item>
-                  <Dropdown.Item href="/final">Final</Dropdown.Item>
+                  <Dropdown.Item href={`/quizes/${item.course}/${item.section}`}>Quizes</Dropdown.Item>
+                  <Dropdown.Item href={`/assignments/${item.course}/${item.section}`}>Assignments</Dropdown.Item>
+                  <Dropdown.Item href={`/projects/${item.course}/${item.section}`}>Project</Dropdown.Item>
+                  <Dropdown.Item href={`/midterm/${item.course}/${item.section}`}>Midterm</Dropdown.Item>
+                  <Dropdown.Item href={`/final/${item.course}/${item.section}`}>Final</Dropdown.Item>
                 </DropdownButton>
                 <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px' }}>
                   <Dropdown.Item href="/upload-quiz-marks">Quizes</Dropdown.Item>

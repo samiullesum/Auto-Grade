@@ -13,6 +13,11 @@ class CreateCourse extends Component {
             title: "",
             section: "",
             noOfStudents: "",
+            quizPercentage: "",
+            assignmentPercentage: "",
+            projectPercentage: "",
+            midtermPercentage: "",
+            finalPercentage: "",
             courseFile: null,
             student: [],
             quizes: [],
@@ -76,10 +81,16 @@ class CreateCourse extends Component {
         const course = {
             title: this.state.title,
             section: this.state.section,
+            quizPercentage: this.state.quizPercentage,
+            assignmentPercentage: this.state.assignmentPercentage,
+            projectPercentage: this.state.projectPercentage,
+            midtermPercentage: this.state.midtermPercentage,
+            finalPercentage: this.state.finalPercentage,
             noOfStudents: this.state.noOfStudents,
             faculty: user.id,
             student: this.state.student
         };
+        console.log(course);
         createCourse(course);
     }
 
@@ -121,6 +132,41 @@ class CreateCourse extends Component {
                             <Form.Group className="mb-3" >
                                 <Form.Label>Number of Students</Form.Label>
                                 <Form.Control type="text" placeholder="Number of Students" onChange={this.handleChange} id="noOfStudents" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Total Percentage on Quiz</Form.Label>
+                                <Form.Control type="text" placeholder="Enter a number from 0 to 100" onChange={this.handleChange} id="quizPercentage" />
+                                <Form.Text className="text-muted">
+                                    Enter 0 if no marks on Quiz
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Total Percentage on Assignment</Form.Label>
+                                <Form.Control type="text" placeholder="Enter a number from 0 to 100" onChange={this.handleChange} id="assignmentPercentage" />
+                                <Form.Text className="text-muted">
+                                    Enter 0 if no marks on Assignment
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Total Percentage on Project</Form.Label>
+                                <Form.Control type="text" placeholder="Enter a number from 0 to 100" onChange={this.handleChange} id="projectPercentage" />
+                                <Form.Text className="text-muted">
+                                    Enter 0 if no marks on Project
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Total Percentage on Midterm</Form.Label>
+                                <Form.Control type="text" placeholder="Enter a number from 0 to 100" onChange={this.handleChange} id="midtermPercentage" />
+                                <Form.Text className="text-muted">
+                                    Enter 0 if no marks on Midterm
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Total Percentage on Final</Form.Label>
+                                <Form.Control type="text" placeholder="Enter a number from 0 to 100" onChange={this.handleChange} id="finalPercentage" />
+                                <Form.Text className="text-muted">
+                                    Enter 0 if no marks on Final
+                                </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Upload a list of enrolled students with Name and ID</Form.Label>

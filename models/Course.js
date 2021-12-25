@@ -10,6 +10,26 @@ const CourseSchema = new Schema({
     type: Number,
     required: true
   },
+  quiz: {
+    type: String,
+    default: "0"
+  },
+  assignment: {
+    type: String,
+    default: "0"
+  },
+  project: {
+    type: String,
+    default: "0"
+  },
+  midterm: {
+    type: String,
+    default: "0"
+  },
+  final: {
+    type: String,
+    default: "0"
+  },
   noOfStudents: {
     type: Number,
     required: true

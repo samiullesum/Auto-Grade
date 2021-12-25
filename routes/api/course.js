@@ -20,7 +20,12 @@ router.post("/create-course", async (req, res) => {
         course_title: req.body.title,
         section: req.body.section,
         noOfStudents: req.body.noOfStudents,
-        faculty: req.body.faculty
+        faculty: req.body.faculty,
+        quiz: req.body.quizPercentage,
+        assignment: req.body.assignmentPercentage,
+        project: req.body.projectPercentage,
+        midterm: req.body.midtermPercentage,
+        final: req.body.finalPercentage
       });
 
       try {
@@ -30,7 +35,6 @@ router.post("/create-course", async (req, res) => {
         });
         user.courses.push(newCourse);
         user.save();
-
         res.sendStatus(200);
       } catch (e) {
         res.status(400).send(e);
@@ -43,12 +47,12 @@ router.post("/upload-quiz-marks", async (req, res) => {
   const marks = req.body.Quiz;
   const course = req.body.course_title;
   const section = req.body.section;
-  
+
   for (let i = 0; i < marks.length; i++) {
     const student_id = marks[i].id;
     const student = await Student.findOne({ id: student_id, course: course, section: section })
 
-    if(student) {
+    if (student) {
       const newQuiz = {
         title: req.body.title,
         marksObtained: marks[i].marksObtained,
@@ -76,12 +80,12 @@ router.post("/upload-assignment-marks", async (req, res) => {
   const marks = req.body.Assignment;
   const course = req.body.course_title;
   const section = req.body.section;
-  
+
   for (let i = 0; i < marks.length; i++) {
     const student_id = marks[i].id;
     const student = await Student.findOne({ id: student_id, course: course, section: section })
 
-    if(student) {
+    if (student) {
       const newAssignment = {
         title: req.body.title,
         marksObtained: marks[i].marksObtained,
@@ -110,12 +114,12 @@ router.post("/upload-project-marks", async (req, res) => {
   const marks = req.body.Project;
   const course = req.body.course_title;
   const section = req.body.section;
-  
+
   for (let i = 0; i < marks.length; i++) {
     const student_id = marks[i].id;
     const student = await Student.findOne({ id: student_id, course: course, section: section })
 
-    if(student) {
+    if (student) {
       const newProject = {
         title: req.body.title,
         marksObtained: marks[i].marksObtained,
@@ -144,12 +148,12 @@ router.post("/upload-midterm-marks", async (req, res) => {
   const marks = req.body.Midterm;
   const course = req.body.course_title;
   const section = req.body.section;
-  
+
   for (let i = 0; i < marks.length; i++) {
     const student_id = marks[i].id;
     const student = await Student.findOne({ id: student_id, course: course, section: section })
 
-    if(student) {
+    if (student) {
       const newMidterm = {
         title: req.body.title,
         marksObtained: marks[i].marksObtained,
@@ -178,12 +182,12 @@ router.post("/upload-final-marks", async (req, res) => {
   const marks = req.body.Final;
   const course = req.body.course_title;
   const section = req.body.section;
-  
+
   for (let i = 0; i < marks.length; i++) {
     const student_id = marks[i].id;
     const student = await Student.findOne({ id: student_id, course: course, section: section })
 
-    if(student) {
+    if (student) {
       const newFinal = {
         title: req.body.title,
         marksObtained: marks[i].marksObtained,
@@ -224,10 +228,28 @@ router.get("/get-courses/:id", async (req, res) => {
   }
 })
 
+router.get("/get-course/:id", async (req, res) => {
+  try {
+    const course = await Course.findOne(req.params.course);
+
+    if (!course) {
+      return res.status(404).json({ msg: 'Course not found' });
+    }
+
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+
+    res.status(500).send('Server Error');
+  }
+})
+
+
+
 router.get("/get-quiz-marks", async (req, res) => {
   try {
-    const students = await Student.find({ faculty: req.body.faculty, section: req.body.section, course: req.body.course });
-    const course = await Course.findOne({ course_title: req.body.course })
+    const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
+    const course = await Course.findOne({ course_title: req.query.course })
 
     if (!students) {
       return res.status(404).json({ msg: 'Students not found for this course' });
@@ -257,8 +279,8 @@ router.get("/get-quiz-marks", async (req, res) => {
 
 router.get("/get-assignment-marks", async (req, res) => {
   try {
-    const students = await Student.find({ faculty: req.body.faculty, section: req.body.section, course: req.body.course });
-    const course = await Course.findOne({ course_title: req.body.course })
+    const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
+    const course = await Course.findOne({ course_title: req.query.course })
 
     if (!students) {
       return res.status(404).json({ msg: 'Students not found for this course!' });
@@ -289,8 +311,8 @@ router.get("/get-assignment-marks", async (req, res) => {
 
 router.get("/get-project-marks", async (req, res) => {
   try {
-    const students = await Student.find({ faculty: req.body.faculty, section: req.body.section, course: req.body.course });
-    const course = await Course.findOne({ course_title: req.body.course })
+    const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
+    const course = await Course.findOne({ course_title: req.query.course })
 
     if (!students) {
       return res.status(404).json({ msg: 'Students not found for this course!' });
@@ -321,8 +343,8 @@ router.get("/get-project-marks", async (req, res) => {
 
 router.get("/get-midterm-marks", async (req, res) => {
   try {
-    const students = await Student.find({ faculty: req.body.faculty, section: req.body.section, course: req.body.course });
-    const course = await Course.findOne({ course_title: req.body.course })
+    const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
+    const course = await Course.findOne({ course_title: req.query.course })
 
     if (!students) {
       return res.status(404).json({ msg: 'Students not found for this course!' });
@@ -353,8 +375,8 @@ router.get("/get-midterm-marks", async (req, res) => {
 
 router.get("/get-final-marks", async (req, res) => {
   try {
-    const students = await Student.find({ faculty: req.body.faculty, section: req.body.section, course: req.body.course });
-    const course = await Course.findOne({ course_title: req.body.course })
+    const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
+    const course = await Course.findOne({ course_title: req.query.course })
 
     if (!students) {
       return res.status(404).json({ msg: 'Students not found for this course!' });
@@ -388,12 +410,12 @@ router.put("/update-quiz-data", async (req, res) => {
   const index = 1;
 
   for (let i = 1; i < students.length; i++) {
-    const student = await Student.findOne({id: students[i].id});
-    if(student) {
-      student.updateOne({ $set: { [`quizes.${index}.title`]: 'Quiz2' }}).exec();
+    const student = await Student.findOne({ id: students[i].id });
+    if (student) {
+      student.updateOne({ $set: { [`quizes.${index}.title`]: 'Quiz2' } }).exec();
     }
-    
-  
+
+
   }
 })
 

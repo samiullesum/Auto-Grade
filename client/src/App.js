@@ -17,6 +17,10 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Header from './components/Header';
 import Quizes from './components/assessments/Quiz/Quizes';
+import Assignments from './components/assessments/Assignment/Assignments';
+import Projects from './components/assessments/Project/Project';
+import Midterm from './components/assessments/Midterm/Midterm';
+import Final from './components/assessments/Final/Final';
 import UploadQuizes from './components/assessments/Quiz/UploadQuiz';
 import UploadAssignments from './components/assessments/Assignment/UploadAssignment';
 import UploadProject from './components/assessments/Project/UploadProject';
@@ -58,7 +62,11 @@ class App extends Component {
             
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/quizes/:id" component={Quizes} />
+              <PrivateRoute exact path="/quizes/:course/:section" component={Quizes} />
+              <PrivateRoute exact path="/assignments/:course/:section" component={Assignments} />
+              <PrivateRoute exact path="/projects/:course/:section" component={Projects} />
+              <PrivateRoute exact path="/midterm/:course/:section" component={Midterm} />
+              <PrivateRoute exact path="/final/:course/:section" component={Final} />
               <PrivateRoute exact path="/upload-quiz-marks" component={UploadQuizes} />
               <PrivateRoute exact path="/upload-assignment-marks" component={UploadAssignments} />
               <PrivateRoute exact path="/upload-project-marks" component={UploadProject} />
