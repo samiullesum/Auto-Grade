@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Jumbotron, Card, Button, DropdownButton, Dropdown } from "react-bootstrap";
+import { Jumbotron, Card, Button, DropdownButton, Dropdown, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import image1 from "../../images/course_cover1.jpg"
-import image2 from "../../images/course_cover2.jpg"
-import image3 from "../../images/course_cover3.png"
-import "./Dashboard.css"
+import Footer from '../footer/Footer';
+import image1 from "../../images/course_cover1.jpg";
+import image2 from "../../images/course_cover2.jpg";
+import image3 from "../../images/course_cover3.png";
+import "./Dashboard.css";
+import AddStudentModal from "./AddStudentModal";
+
 
 var imageArr = [image1, image2, image3];
 
 const Dashboard = props => {
   const [courses, setCourses] = useState([]);
   const [fetching, setFetching] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const getCourses = () => {
 
@@ -31,9 +35,17 @@ const Dashboard = props => {
   }
 
   useEffect(() => getCourses(), []);
+
+  const toggleModal = () => {
+    setShowModal(!showModal)
+}
+const handleModal = () => {
+    setShowModal(true);
+}
   const { user } = props.auth;
 
   const renderCourses = () => {
+    let i = 0;
     if (fetching) {
       return <h4 class="loading">Loading...</h4>;
     }
@@ -49,12 +61,10 @@ const Dashboard = props => {
             <Card.Body>
               <Card.Title>You have not created any courses yet </Card.Title>
               <Button variant="primary" href="/create-course">
-                Create a Course
+                Create A Course
               </Button>
             </Card.Body>
           </Card>
-
-
         </div>
       )
     }
@@ -62,14 +72,20 @@ const Dashboard = props => {
       return (
         <div style={{ display: 'table', margin: '0 auto', paddingTop: '5vw' }}>
           {courses.map((item, idx) =>
-            <Card key={idx} style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={imageArr[0]} />
+            <Card key={item.course} style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={imageArr[i++]} style={{height: '22vh'}}/>
               <Card.Body>
                 <Card.Title>{item.course}</Card.Title>
                 <Card.Text>
                   Autumn 2021
                 </Card.Text>
-
+                <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px', marginLeft: '15px' }}>
+                  <Dropdown.Item href="/upload-quiz-marks">Quizes</Dropdown.Item>
+                  <Dropdown.Item href="/upload-assignment-marks">Assignments</Dropdown.Item>
+                  <Dropdown.Item href="/upload-project-marks">Project</Dropdown.Item>
+                  <Dropdown.Item href="/upload-midterm-marks">Midterm</Dropdown.Item>
+                  <Dropdown.Item href="/upload-final-marks">Final</Dropdown.Item>
+                </DropdownButton>
                 <DropdownButton id="dropdown-basic-button" title="View Assessment Marks" style={{ marginTop: '8px' }}>
                   <Dropdown.Item href={`/quizes/${item.course}/${item.section}`}>Quizes</Dropdown.Item>
                   <Dropdown.Item href={`/assignments/${item.course}/${item.section}`}>Assignments</Dropdown.Item>
@@ -78,13 +94,8 @@ const Dashboard = props => {
                   <Dropdown.Item href={`/final/${item.course}/${item.section}`}>Final</Dropdown.Item>
                 </DropdownButton>
                 <Button href={`/generate-grades/${item.course}/${item.section}`} style={{marginTop: '9px', marginRight: '39px', background: "#092040", border: "none" }}>View Course Grades</Button>
-                <DropdownButton id="dropdown-basic-button" variant="success" title="Upload Assessment Marks" style={{ marginTop: '8px', marginLeft: '15px' }}>
-                  <Dropdown.Item href="/upload-quiz-marks">Quizes</Dropdown.Item>
-                  <Dropdown.Item href="/upload-assignment-marks">Assignments</Dropdown.Item>
-                  <Dropdown.Item href="/upload-project-marks">Project</Dropdown.Item>
-                  <Dropdown.Item href="/upload-midterm-marks">Midterm</Dropdown.Item>
-                  <Dropdown.Item href="/upload-final-marks">Final</Dropdown.Item>
-                </DropdownButton>
+                <AddStudentModal showModal={showModal} toggle={toggleModal} user={user}/>
+                <Button onClick={handleModal} style={{marginTop: '9px', marginRight: '50px', background: "#092040", border: "none" }}>Add A New Student</Button>
               </Card.Body>
             </Card>
           )}
@@ -95,6 +106,7 @@ const Dashboard = props => {
   }
 
   return (
+    <>
     <Jumbotron fluid style={{ textAlign: "center", height: "100vh" }}>
       <h4>
         <b>Hey there,</b> {user.name.split(" ")[0]}
@@ -103,11 +115,9 @@ const Dashboard = props => {
         </p>
       </h4>
       {renderCourses()}
-
-
-
-
     </Jumbotron>
+    <Footer />
+    </>
   );
 }
 

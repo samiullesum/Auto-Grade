@@ -104,9 +104,7 @@ class CreateCourse extends Component {
             faculty: user.id,
             student: this.state.student
         };
-        
         updateQuizData(course);
-
     }
     render() {
         return (

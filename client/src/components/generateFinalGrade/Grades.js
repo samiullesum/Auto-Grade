@@ -7,8 +7,6 @@ import GradesComponent from './GradesComponent';
 import generatePDF from "./GeneratePDF";
 
 const Tickets = props => {
-
-    const [tickets, setTickets] = useState([]);
     const [grades, setGrades] = useState([]);
     const [fetching, setFetching] = useState(true);
     const { user } = props.auth;

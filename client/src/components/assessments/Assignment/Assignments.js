@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { useParams } from 'react-router-dom'
 import { Container, Card, Button, Table, Badge } from "react-bootstrap";
+import AssignmentModal from './AssignmentModal'
 
 const Assignments = props => {
 
     const [assignments, setAssignments] = useState([]);
     const [total, setTotal] = useState();
     const [fetching, setFetching] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const { course, section } = useParams();
     const { user } = props.auth;
 
@@ -76,6 +78,14 @@ const Assignments = props => {
             
             return ((total * sum)/totalmSum).toFixed(1);
         }
+        const toggleModal = () => {
+            setShowModal(!showModal) 
+          }
+    
+
+        const handleModal = () => {
+            setShowModal(true);
+        }
 
         const totalMarksGenerate = () => {
             let total = assignments[0].assignments[0].totalMarks;
@@ -86,6 +96,8 @@ const Assignments = props => {
             return (
                 <>
                     <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary"><span role="img" aria-label="image">📄</span> Assignment Marks for {course}</Badge></h1></div>
+                    <AssignmentModal showModal={showModal} toggle={toggleModal} />
+                    <Button style={{marginBottom: "3vw"}} onClick={handleModal}>Edit Assignment Marks</Button>
                     <Table striped bordered hover size="sm" style={{ background: "#fff" }}>
                         <thead>
                             <tr>

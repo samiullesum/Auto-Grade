@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import axios from "axios";
+import FinalModal from "./FinalModal";
 import { useParams } from 'react-router-dom'
 import { Container, Card, Button, Table, Badge } from "react-bootstrap";
 
@@ -9,6 +10,7 @@ const Final = props => {
     const [final, setFinal] = useState([]);
     const [total, setTotal] = useState();
     const [fetching, setFetching] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const { course, section } = useParams();
     const { user } = props.auth;
 
@@ -44,6 +46,14 @@ const Final = props => {
 
     useEffect(() => getCourseData(), []);
     useEffect(() => getFinalData(), []);
+
+    const toggleModal = () => {
+        setShowModal(!showModal)
+    }
+
+    const handleModal = () => {
+        setShowModal(true);
+    }
 
     const renderFinalData = () => {
         if (fetching) {
@@ -85,6 +95,8 @@ const Final = props => {
             return (
                 <>
                     <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">📄 Final Marks for {course}</Badge></h1></div>
+                    <FinalModal showModal={showModal} toggle={toggleModal} />
+                    <Button style={{ marginBottom: "3vw" }} onClick={handleModal}>Edit Final Marks</Button>
                     <Table striped bordered hover size="sm" style={{ background: "#fff" }}>
                         <thead>
                             <tr>

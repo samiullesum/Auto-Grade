@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import axios from "axios";
+import MidtermModal from "./MidtermModal";
 import { useParams } from 'react-router-dom'
 import { Container, Card, Button, Table, Badge } from "react-bootstrap";
 
@@ -9,6 +10,7 @@ const Midterm = props => {
     const [midterm, setMidterm] = useState([]);
     const [total, setTotal] = useState();
     const [fetching, setFetching] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const { course, section } = useParams();
     const { user } = props.auth;
 
@@ -41,8 +43,17 @@ const Midterm = props => {
           })
     }
 
+
     useEffect(() => getCourseData(), []);
     useEffect(() => getMidtermData(), []);
+    
+    const toggleModal = () => {
+        setShowModal(!showModal)
+    }
+
+    const handleModal = () => {
+        setShowModal(true);
+    }
 
     const renderMidtermData = () => {
         if (fetching) {
@@ -84,6 +95,8 @@ const Midterm = props => {
             return (
                 <>
                     <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">📄 Midterm Marks for {course}</Badge></h1></div>
+                    <MidtermModal showModal={showModal} toggle={toggleModal} />
+                    <Button style={{ marginBottom: "3vw" }} onClick={handleModal}>Edit Midterm Marks</Button>
                     <Table striped bordered hover size="sm" style={{ background: "#fff" }}>
                         <thead>
                             <tr>

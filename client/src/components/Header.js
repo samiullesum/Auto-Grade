@@ -13,13 +13,6 @@ const Header = props => {
     if (a.isAuthenticated) {
         return (
           <Nav>
-         {/*    <DropdownButton id="dropdown-basic-button" title="Select an Assessment" style={{ marginTop: '8px' }}>
-              <Dropdown.Item href="/quizes">Quizes</Dropdown.Item>
-              <Dropdown.Item href="/assignments">Assignments</Dropdown.Item>
-              <Dropdown.Item href="/project">Project</Dropdown.Item>
-              <Dropdown.Item href="/midterm">Midterm</Dropdown.Item>
-              <Dropdown.Item href="/final">Final</Dropdown.Item>
-            </DropdownButton> */}
             <Nav.Link href="/dashboard">
               <Button variant="primary">
                 My Courses
@@ -27,12 +20,11 @@ const Header = props => {
             </Nav.Link>
             <Nav.Link href="/create-course">
               <Button variant="primary" style={{ marginRight: '8px' }}>
-                Create a Course
+                Create A Course
               </Button>
             </Nav.Link>
             <DropdownButton style={{background: "#DFF4FF" }} id="dropdown-basic-button" title="Account" style={{ marginTop: '8px' }}>
-              <Dropdown.Item style={{color: "#092040", fontWeight: '600' }}onClick={onLogoutClick}>⚙️Log out</Dropdown.Item>
-
+              <Dropdown.Item style={{color: "#092040", fontWeight: '600' }}onClick={onLogoutClick}><span role="img" aria-label="image">⚙️</span>Log out</Dropdown.Item>
             </DropdownButton>
           </Nav>
         )
@@ -70,8 +62,8 @@ const Header = props => {
 
   const currentRoute = window.location.pathname;
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="dark">
-      <Navbar.Brand href="/" style={{ color: "#092040", fontWeight: '700' }}>
+    <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: "#DFF4FF" }} variant="dark">
+      <Navbar.Brand href="/" style={{ color: "#092040", fontWeight: '700' }} >
         Auto-Grade
 
       </Navbar.Brand>

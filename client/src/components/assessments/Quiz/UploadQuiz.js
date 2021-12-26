@@ -82,7 +82,7 @@ class UploadQuiz extends Component {
     onFileChange(e) {
         this.setState({ courseFile: e.target.files[0] })
     }
- 
+
     render() {
         return (
             <Container fluid="md">
@@ -90,7 +90,7 @@ class UploadQuiz extends Component {
                     <Col md="8">
                         <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">Upload Quiz Marks</Badge></h1></div>
                         <Form>
-                        <Form.Group className="mb-3">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Select a Course</Form.Label>
                                 <Form.Control as="select" onChange={this.handleChange} id="course">
                                     <option>Select a Course</option>

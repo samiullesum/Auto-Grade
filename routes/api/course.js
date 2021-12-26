@@ -43,6 +43,42 @@ router.post("/create-course", async (req, res) => {
   });
 });
 
+
+router.put("/add-student", async (req, res) => {
+  const id = req.body.id;
+
+ Student.findOne({ id: id, course: req.body.course, section: req.body.section }).then(st => {
+    if (st) {
+      return res.status(400).json({ course: "Student already exists" });
+    } else {
+      const student = new Student({
+        id: req.body.id,
+        name: req.body.name,
+        course: req.body.course,
+        section: req.body.section,
+        faculty: req.body.faculty,
+        quizes: req.body.quizes,
+        assignments: req.body.assignments,
+        project: req.body.project,
+        midterm: req.body.midterm,
+        final: req.body.final
+      })
+
+      try {
+       student.save();
+        res.sendStatus(200);
+      } catch (e) {
+        res.status(400).send(e);
+      }
+    }
+  });
+});
+
+
+
+
+
+
 router.post("/upload-quiz-marks", async (req, res) => {
   const marks = req.body.Quiz;
   const course = req.body.course_title;
@@ -244,8 +280,6 @@ router.get("/get-course/:id", async (req, res) => {
   }
 })
 
-
-
 router.get("/get-quiz-marks", async (req, res) => {
   try {
     const students = await Student.find({ faculty: req.query.faculty, section: req.query.section, course: req.query.course });
@@ -417,6 +451,115 @@ router.put("/update-quiz-data", async (req, res) => {
   }
 })
 
+router.put("/update-quiz", async (req, res) => {
+  const id = req.body.id;
+  const quiz = req.body.quiz;
+  let index;
+  if (quiz === "Quiz1") {
+    index = 0;
+  }
+  if (quiz === "Quiz2") {
+    index = 1;
+  }
+  if (quiz === "Quiz3") {
+    index = 2;
+  }
+  if (quiz === "Quiz4") {
+    index = 3;
+  }
+  if (quiz === "Quiz5") {
+    index = 4;
+  }
+  if (quiz === "Quiz6") {
+    index = 5;
+  }
+
+  const student = await Student.findOne({ id: id });
+  if (student) {
+    student.updateOne({ $set: { [`quizes.${index}.marksObtained`]: req.body.marks } }).exec();
+  }
+
+})
+
+router.put("/update-assignment", async (req, res) => {
+  const id = req.body.id;
+  const assignment = req.body.assignment;
+  let index;
+  if (assignment === "Assignment1") {
+    index = 0;
+  }
+  if (assignment === "Assignment2") {
+    index = 1;
+  }
+  if (assignment === "Assignment3") {
+    index = 2;
+  }
+  if (assignment === "Assignment4") {
+    index = 3;
+  }
+  if (assignment === "Assignment5") {
+    index = 4;
+  }
+  if (assignment === "Assignment6") {
+    index = 5;
+  }
+
+  const student = await Student.findOne({ id: id });
+  if (student) {
+    student.updateOne({ $set: { [`assignments.${index}.marksObtained`]: req.body.marks } }).exec();
+  }
+
+})
+
+router.put("/update-project", async (req, res) => {
+  const id = req.body.id;
+  const project = req.body.project;
+  let index;
+  if (project === "Project1") {
+    index = 0;
+  }
+  if (project === "Project2") {
+    index = 1;
+  }
+  if (project === "Project3") {
+    index = 2;
+  }
+  if (project === "Project4") {
+    index = 3;
+  }
+  if (project === "Project5") {
+    index = 4;
+  }
+  if (project === "Project6") {
+    index = 5;
+  }
+
+  const student = await Student.findOne({ id: id });
+  if (student) {
+    student.updateOne({ $set: { [`project.${index}.marksObtained`]: req.body.marks } }).exec();
+  }
+
+})
+
+router.put("/update-midterm", async (req, res) => {
+  const id = req.body.id;
+  let index = 0;
+  const student = await Student.findOne({ id: id });
+  if (student) {
+    student.updateOne({ $set: { [`midterm.${index}.marksObtained`]: req.body.marks } }).exec();
+  }
+})
+
+router.put("/update-final", async (req, res) => {
+  const id = req.body.id;
+  let index = 0;
+  const student = await Student.findOne({ id: id });
+  if (student) {
+    student.updateOne({ $set: { [`final.${index}.marksObtained`]: req.body.marks } }).exec();
+  }
+})
+
+
 router.get("/generate-grade", async (req, res) => {
   try {
     const students = await Student.find({ course: req.query.course, section: req.query.section, faculty: req.query.faculty });
@@ -445,7 +588,7 @@ router.get("/generate-grade", async (req, res) => {
       } else {
         totalQuiz = 0;
       }
-      
+
 
       if (students[i].assignments.length > 0) {
         let marksA = students[i].assignments.map(item => parseInt(item.marksObtained));
@@ -456,7 +599,7 @@ router.get("/generate-grade", async (req, res) => {
       } else {
         totalAssignment = 0;
       }
-      
+
 
       if (students[i].project.length > 0) {
         let marksP = students[i].project.map(item => parseInt(item.marksObtained));
@@ -467,7 +610,7 @@ router.get("/generate-grade", async (req, res) => {
       } else {
         totalProject = 0;
       }
-      
+
 
       if (students[i].midterm.length > 0) {
         let marksM = students[i].midterm.map(item => parseInt(item.marksObtained));
@@ -478,7 +621,7 @@ router.get("/generate-grade", async (req, res) => {
       } else {
         totalMidterm = 0;
       }
-      
+
 
       if (students[i].final.length > 0) {
         let marksF = students[i].final.map(item => parseInt(item.marksObtained));
@@ -489,7 +632,7 @@ router.get("/generate-grade", async (req, res) => {
       } else {
         totalFinal = 0;
       }
-    
+
       const item = {
         id: students[i].id,
         name: students[i].name,
