@@ -55,13 +55,9 @@ class UploadAssignment extends Component {
             section: this.state.section,
             Assignment: this.state.Assignment,
         };
-
-        //uploadAssignmentMarks(marks);
-        this.setState({ assignmentTitle: "" });
-        this.setState({ totalMarks: "" });
-        this.setState({ course: "" });
-        this.setState({ section: "" });
-        this.setState({ Assignment: [] });
+        console.log(marks)
+        uploadAssignmentMarks(marks);
+     
     }
 
     handleOnError = (err, file, inputElem, reason) => {
@@ -93,7 +89,7 @@ class UploadAssignment extends Component {
                 <Row style={{ marginTop: "5vw" }}>
                     <Col md="8">
                         <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">Upload Assignment Marks</Badge></h1></div>
-                        <Form onSubmit={this.handleUploadAssignmentMarks}>
+                        <Form>
                             <Form.Group className="mb-3">
                                 <Form.Label>Select a Course</Form.Label>
                                 <Form.Control as="select" onChange={this.handleChange} id="course">
@@ -133,7 +129,7 @@ class UploadAssignment extends Component {
                                     onError={this.handleOnError}
                                     noClick
                                     noDrag
-                                    onRemoveFile={this.handleAssignmentRemoveFile}
+                                    onRemoveFile={this.handleRemoveFile}
                                 >
                                     {({ file }) => (
                                         <aside
@@ -168,7 +164,7 @@ class UploadAssignment extends Component {
                                             </div>
                                             <Button
                                                 style={{ height: '45px', marginTop: '5px' }}
-                                                onClick={this.handleAssignmentRemoveFile}
+                                                onClick={this.handleRemoveFile}
                                             >
                                                 Remove File
                                             </Button>
@@ -182,7 +178,7 @@ class UploadAssignment extends Component {
                                     File should contain data of Student ID, Student Name and Obtained marks of each student
                                 </Form.Text>
                             </Form.Group>
-                            <Button variant="primary" type="submit" style={{ height: '45px', marginTop: '3vw' }} >
+                            <Button variant="primary" type="submit" style={{ height: '45px', marginTop: '3vw' }} onClick={this.handleUploadAssignmentMarks}>
                                 Upload Assignment Marks
                             </Button>
 

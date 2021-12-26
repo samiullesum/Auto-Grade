@@ -439,12 +439,21 @@ router.get("/get-final-marks", async (req, res) => {
 
 router.put("/update-quiz-data", async (req, res) => {
   const students = req.body.student;
-  const index = 1;
+  const index = 0;
+  
 
   for (let i = 1; i < students.length; i++) {
     const student = await Student.findOne({ id: students[i].id });
+    console.log(student.id);
     if (student) {
-      student.updateOne({ $set: { [`quizes.${index}.title`]: 'Quiz2' } }).exec();
+      
+      // student.updateOne({ $set: { [`midterm.$.totalMarks`]: '100' } }).exec();
+    try {
+      student.updateOne({ $set: { [`final.${index}.totalMarks`]: "100" } }).exec();
+    } catch(e) {
+      console.log(e);
+    }
+
     }
   }
 })

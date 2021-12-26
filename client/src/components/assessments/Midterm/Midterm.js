@@ -46,7 +46,7 @@ const Midterm = props => {
 
     useEffect(() => getCourseData(), []);
     useEffect(() => getMidtermData(), []);
-    
+
     const toggleModal = () => {
         setShowModal(!showModal)
     }
@@ -86,10 +86,7 @@ const Midterm = props => {
             return ((total * sum)/totalmSum).toFixed(1);
         }
 
-        const totalMarksGenerate = () => {
-            let total = midterm[0].midterm[0].totalMarks;
-            return total;
-        }
+     
 
         if (midterm.length > 0) {
             return (
@@ -102,7 +99,7 @@ const Midterm = props => {
                             <tr>
                                 <th>Student ID</th>
                                 <th>Name</th>
-                                <th>Total({totalMarksGenerate() ? totalMarksGenerate() : 100})</th>
+                                <th>Total</th>
                                 <th>Avg.({total})</th>
                             </tr>
                         </thead>
@@ -113,7 +110,7 @@ const Midterm = props => {
                                     <td>{item.name}</td>
                                     <td>{item.midterm[0] ? item.midterm[0].marksObtained : 0}</td>
                                   
-                                    <td>{midtermAvg(item.midterm)}</td>
+                                    <td>{isNaN(midtermAvg(item.midterm)) ? 0 : midtermAvg(item.midterm)}</td>
                                 </tr>
                             )}
                         </tbody>

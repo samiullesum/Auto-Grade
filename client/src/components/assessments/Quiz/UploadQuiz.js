@@ -164,7 +164,7 @@ class UploadQuiz extends Component {
                                             </div>
                                             <Button
                                                 style={{ height: '45px', marginTop: '5px' }}
-                                                onClick={this.handleQuizRemoveFile}
+                                                onClick={this.handleRemoveFile}
                                             >
                                                 Remove File
                                             </Button>

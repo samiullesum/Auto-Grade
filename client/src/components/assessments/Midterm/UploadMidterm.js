@@ -118,7 +118,7 @@ class UploadMidterm extends Component {
                                     onError={this.handleOnError}
                                     noClick
                                     noDrag
-                                    onRemoveFile={this.handleMidtermRemoveFile}
+                                    onRemoveFile={this.handlemRemoveFile}
                                 >
                                     {({ file }) => (
                                         <aside

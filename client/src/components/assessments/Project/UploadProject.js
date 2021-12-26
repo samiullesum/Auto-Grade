@@ -164,7 +164,7 @@ class UploadProject extends Component {
                                             </div>
                                             <Button
                                                 style={{ height: '45px', marginTop: '5px' }}
-                                                onClick={this.handleProjectRemoveFile}
+                                                onClick={this.handleRemoveFile}
                                             >
                                                 Remove File
                                             </Button>

@@ -87,10 +87,7 @@ const Assignments = props => {
             setShowModal(true);
         }
 
-        const totalMarksGenerate = () => {
-            let total = assignments[0].assignments[0].totalMarks;
-            return total;
-        }
+  
 
         if (assignments.length > 0) {
             return (
@@ -103,12 +100,12 @@ const Assignments = props => {
                             <tr>
                                 <th>Student ID</th>
                                 <th>Name</th>
-                                <th>Assignment1({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Assignment2({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Assignment3({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Assignment4({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Assignment5({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Assignment6({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
+                                <th>Assignment1</th>
+                                <th>Assignment2</th>
+                                <th>Assignment3</th>
+                                <th>Assignment4</th>
+                                <th>Assignment5</th>
+                                <th>Assignment6</th>
                                 <th>Avg.({total})</th>
                             </tr>
                         </thead>
@@ -123,7 +120,7 @@ const Assignments = props => {
                                     <td>{item.assignments[3] ? item.assignments[3].marksObtained : 0}</td>
                                     <td>{item.assignments[4] ? item.assignments[4].marksObtained : 0}</td>
                                     <td>{item.assignments[5] ? item.assignments[5].marksObtained : 0}</td>
-                                    <td>{assignmentAvg(item.assignments)}</td>
+                                    <td>{isNaN(assignmentAvg(item.assignments)) ? 0 : assignmentAvg(item.assignments)}</td>
                                 </tr>
                             )}
                         </tbody>

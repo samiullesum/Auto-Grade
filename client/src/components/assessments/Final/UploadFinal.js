@@ -153,7 +153,7 @@ class UploadFinal extends Component {
                                             </div>
                                             <Button
                                                 style={{ height: '45px', marginTop: '5px' }}
-                                                onClick={this.handleFinalRemoveFile}
+                                                onClick={this.handleRemoveFile}
                                             >
                                                 Remove File
                                             </Button>

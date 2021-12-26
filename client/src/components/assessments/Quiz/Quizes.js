@@ -59,12 +59,33 @@ const Quizes = props => {
     useEffect(() => getQuizData(), []);
     useEffect(() => getCourseData(), []);
 
+    const quizAvg = (quiz) => {
+       
+        let marks = quiz.map(item => parseInt(item.marksObtained));
+        let totalm = quiz.map(item => parseInt(item.totalMarks));
+        let sum = marks.reduce((a, b) => a + b, 0);
+        let totalmSum = totalm.reduce((a, b) => a + b, 0);
+
+        return ((total * sum) / totalmSum).toFixed(1);
+        
+    }
+
+    function totalMarksGenerate () {
+        if(typeof quizes[0].quizes[0].totalMarks === 'undefined') {
+          return -1;
+        }
+        
+        
+    }
+
+
     const renderQuizData = () => {
         if (fetching) {
             return <h4 className="loading">Loading...</h4>;
         }
         if (quizes.length === 0) {
             return (
+                <>
                 <div style={{ display: 'table', margin: '0 auto', paddingTop: '5vw' }}>
                     <Card
                         style={{ width: '18rem' }}
@@ -79,23 +100,10 @@ const Quizes = props => {
                         </Card.Body>
                     </Card>
                 </div>
+                </>
             )
         }
 
-        const quizAvg = (quiz) => {
-
-            let marks = quiz.map(item => parseInt(item.marksObtained));
-            let totalm = quiz.map(item => parseInt(item.totalMarks));
-            let sum = marks.reduce((a, b) => a + b, 0);
-            let totalmSum = totalm.reduce((a, b) => a + b, 0);
-
-            return ((total * sum) / totalmSum).toFixed(1);
-        }
-
-        const totalMarksGenerate = () => {
-            let total = quizes[0].quizes[0].totalMarks;
-            return total;
-        }
 
         if (quizes.length > 0) {
             return (
@@ -108,12 +116,12 @@ const Quizes = props => {
                             <tr>
                                 <th>Student ID</th>
                                 <th>Name</th>
-                                <th>Quiz1({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Quiz2({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Quiz3({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Quiz4({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Quiz5({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Quiz6({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
+                                <th>Quiz1</th>
+                                <th>Quiz2</th>
+                                <th>Quiz3</th>
+                                <th>Quiz4</th>
+                                <th>Quiz5</th>
+                                <th>Quiz6</th>
                                 <th>Avg.({total})</th>
                             </tr>
                         </thead>
@@ -128,7 +136,7 @@ const Quizes = props => {
                                     <td key={idx}>{item.quizes[3] ? item.quizes[3].marksObtained : 0}</td>
                                     <td key={idx}>{item.quizes[4] ? item.quizes[4].marksObtained : 0}</td>
                                     <td key={idx}>{item.quizes[5] ? item.quizes[5].marksObtained : 0}</td>
-                                    <td key={idx}>{quizAvg(item.quizes)}</td>
+                                    <td key={idx}>{isNaN(quizAvg(item.quizes)) ? 0 : quizAvg(item.quizes)}</td>
                                 </tr>
                             )}
                         </tbody>

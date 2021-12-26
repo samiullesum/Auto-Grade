@@ -86,10 +86,7 @@ const Final = props => {
             return ((total * sum) / totalmSum).toFixed(1);
         }
 
-        const totalMarksGenerate = () => {
-            let total = final[0].final[0].totalMarks;
-            return total;
-        }
+    
 
         if (final.length > 0) {
             return (
@@ -102,7 +99,7 @@ const Final = props => {
                             <tr>
                                 <th>Student ID</th>
                                 <th>Name</th>
-                                <th>Total({totalMarksGenerate() ? totalMarksGenerate() : 100})</th>
+                                <th>Total</th>
                                 <th>Avg.({total})</th>
                             </tr>
                         </thead>
@@ -112,7 +109,7 @@ const Final = props => {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.final[0] ? item.final[0].marksObtained : 0}</td>
-                                    <td>{finalAvg(item.final)}</td>
+                                    <td>{isNaN(finalAvg(item.final)) ? 0 : finalAvg(item.final)}</td>
                                 </tr>
                             )}
                         </tbody>

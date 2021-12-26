@@ -87,11 +87,7 @@ const Projects = props => {
             return ((total * sum) / totalmSum).toFixed(1);
         }
 
-        const totalMarksGenerate = () => {
-            let total = projects[0].projects[0].totalMarks;
-            return total;
-        }
-
+     
         if (projects.length > 0) {
             return (
                 <>
@@ -103,12 +99,12 @@ const Projects = props => {
                             <tr>
                                 <th>Student ID</th>
                                 <th>Name</th>
-                                <th>Project1({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Project2({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Project3({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Project4({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Project5({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
-                                <th>Project6({totalMarksGenerate() ? totalMarksGenerate() : 15})</th>
+                                <th>Project1</th>
+                                <th>Project2</th>
+                                <th>Project3</th>
+                                <th>Project4</th>
+                                <th>Project5</th>
+                                <th>Project6</th>
                                 <th>Avg.({total})</th>
                             </tr>
                         </thead>
@@ -123,7 +119,7 @@ const Projects = props => {
                                     <td>{item.projects[3] ? item.projects[3].marksObtained : 0}</td>
                                     <td>{item.projects[4] ? item.projects[4].marksObtained : 0}</td>
                                     <td>{item.projects[5] ? item.projects[5].marksObtained : 0}</td>
-                                    <td>{projectAvg(item.projects)}</td>
+                                    <td>{isNaN(projectAvg(item.projects)) ? 0 : projectAvg(item.projects) }</td>
                                 </tr>
                             )}
                         </tbody>
