@@ -15,11 +15,9 @@ body {
   padding-top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #6688BF 0%, #7AC6EA 100%);
+  box-shadow: 0px 13px 25px rgba(47, 115, 196, 0.5);
+  border-radius: 20px;
   text-align: center;
 }
 

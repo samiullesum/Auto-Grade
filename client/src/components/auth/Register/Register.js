@@ -151,9 +151,7 @@ class Register extends Component {
 
             <p className="create">
               Already have an account?{" "}
-              <button type="button" className="toggle-signup">
-                <Link to={{ pathname: "/login" }}>Sign in</Link>
-              </button>
+              <Link to={{ pathname: "/login" }}>Sign in</Link>
             </p>
           </form>
         </div>

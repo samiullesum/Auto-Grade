@@ -22,6 +22,7 @@ class UploadAssignment extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
+        this.handleUploadAssignmentMarks = this.handleUploadAssignmentMarks.bind(this);
     }
     handleOpenDialog = (e) => {
         // Note that the ref is set async, so it might be null at some point
@@ -55,8 +56,12 @@ class UploadAssignment extends Component {
             Assignment: this.state.Assignment,
         };
 
-        uploadAssignmentMarks(marks);
-
+        //uploadAssignmentMarks(marks);
+        this.setState({ assignmentTitle: "" });
+        this.setState({ totalMarks: "" });
+        this.setState({ course: "" });
+        this.setState({ section: "" });
+        this.setState({ Assignment: [] });
     }
 
     handleOnError = (err, file, inputElem, reason) => {
@@ -81,15 +86,15 @@ class UploadAssignment extends Component {
     onFileChange(e) {
         this.setState({ courseFile: e.target.files[0] })
     }
- 
+
     render() {
         return (
             <Container fluid="md">
                 <Row style={{ marginTop: "5vw" }}>
                     <Col md="8">
                         <div><h1 style={{ marginBottom: "3vw" }}><Badge bg="primary">Upload Assignment Marks</Badge></h1></div>
-                        <Form>
-                        <Form.Group className="mb-3">
+                        <Form onSubmit={this.handleUploadAssignmentMarks}>
+                            <Form.Group className="mb-3">
                                 <Form.Label>Select a Course</Form.Label>
                                 <Form.Control as="select" onChange={this.handleChange} id="course">
                                     <option>Select a Course</option>
@@ -177,13 +182,12 @@ class UploadAssignment extends Component {
                                     File should contain data of Student ID, Student Name and Obtained marks of each student
                                 </Form.Text>
                             </Form.Group>
-
+                            <Button variant="primary" type="submit" style={{ height: '45px', marginTop: '3vw' }} >
+                                Upload Assignment Marks
+                            </Button>
 
                         </Form>
 
-                        <Button variant="primary" type="submit" style={{ height: '45px', marginTop: '3vw' }} onClick={this.handleUploadAssignmentMarks}>
-                            Upload Assignment Marks
-                        </Button>
                     </Col>
                     <Col md={4}>
                         <Card style={{ width: '30rem' }}>

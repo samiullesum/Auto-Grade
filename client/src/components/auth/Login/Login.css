@@ -15,11 +15,9 @@ body {
   padding-top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #6688BF 0%, #7AC6EA 100%);
+  box-shadow: 0px 13px 25px rgba(47, 115, 196, 0.5);
+  border-radius: 20px;
   text-align: center;
 }
 
@@ -97,7 +95,7 @@ body {
 }
 
 #login-toggle {
-  background: #57b846;
+  background: #0275d8;
   color: #ffff;
 }
 
@@ -116,7 +114,7 @@ body {
 .form-modal .create button {
   outline: none;
   border: none;
-  color: #57b846;
+  color: #0275d8;
 }
 .form-modal .create button:hover {
   transform: scale(1.1);
@@ -166,7 +164,7 @@ body {
 }
 
 .form-modal p a {
-  color: #57b846;
+  color: #0275d8;
   text-decoration: none;
   transition: 0.2s;
 }

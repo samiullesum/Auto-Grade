@@ -128,9 +128,7 @@ class Login extends Component {
 
             <p className="create">
               No Account?{" "}
-              <button type="button" className="toggle-signup">
                 <Link to={{ pathname: "/register" }}>Create one</Link>
-              </button>
             </p>
           </form>
         </div>

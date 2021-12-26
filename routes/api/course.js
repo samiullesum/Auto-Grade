@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 require('dotenv').config();
 
-
-
 const User = require("../../models/User");
 const Student = require("../../models/Student");
 const Course = require("../../models/Course");
