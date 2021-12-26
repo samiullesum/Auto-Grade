@@ -2,20 +2,6 @@
 
 Auto-Grade full-stack web app developed using the `MERN` stack (`MongoDB` for our database, `Express` and `Node` for our backend, and `React` for our frontend). Also integrated `Redux` for the state management for our `React` components.
 
-## :link: Live Demo
-
-
-<p align="center"> 
-  <kbd>
-<img src="https://res.cloudinary.com/sam13/image/upload/v1614530452/signup_rf98dh.png"></img>
-  </kbd>
-</p>
-
-<p align="center"> 
-  <kbd>
-<img src="https://res.cloudinary.com/sam13/image/upload/v1614530446/signin_bjhorp.png"></img>
-  </kbd>
-</p>
 
 
 **Auto-Grade app will allow users to**
