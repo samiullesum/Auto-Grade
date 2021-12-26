@@ -481,7 +481,7 @@ router.put("/update-quiz", async (req, res) => {
     index = 5;
   }
 
-  const student = await Student.findOne({ id: id });
+  const student = await Student.findOne({ id: id, course: req.body.course });
   if (student) {
     student.updateOne({ $set: { [`quizes.${index}.marksObtained`]: req.body.marks } }).exec();
   }
@@ -511,7 +511,7 @@ router.put("/update-assignment", async (req, res) => {
     index = 5;
   }
 
-  const student = await Student.findOne({ id: id });
+  const student = await Student.findOne({ id: id, course: req.body.course });
   if (student) {
     student.updateOne({ $set: { [`assignments.${index}.marksObtained`]: req.body.marks } }).exec();
   }
@@ -551,7 +551,7 @@ router.put("/update-project", async (req, res) => {
 router.put("/update-midterm", async (req, res) => {
   const id = req.body.id;
   let index = 0;
-  const student = await Student.findOne({ id: id });
+  const student = await Student.findOne({ id: id, course: req.body.course });
   if (student) {
     student.updateOne({ $set: { [`midterm.${index}.marksObtained`]: req.body.marks } }).exec();
   }
@@ -560,7 +560,7 @@ router.put("/update-midterm", async (req, res) => {
 router.put("/update-final", async (req, res) => {
   const id = req.body.id;
   let index = 0;
-  const student = await Student.findOne({ id: id });
+  const student = await Student.findOne({ id: id, course: req.body.course });
   if (student) {
     student.updateOne({ $set: { [`final.${index}.marksObtained`]: req.body.marks } }).exec();
   }
@@ -570,6 +570,7 @@ router.put("/update-final", async (req, res) => {
 router.get("/generate-grade", async (req, res) => {
   try {
     const students = await Student.find({ course: req.query.course, section: req.query.section, faculty: req.query.faculty });
+
     const course = await Course.findOne({ course_title: req.query.course });
     const totalQ = course.quiz;
     const totalA = course.assignment;
